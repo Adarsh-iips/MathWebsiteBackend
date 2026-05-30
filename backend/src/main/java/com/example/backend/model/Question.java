@@ -10,7 +10,7 @@ public class Question {
 
     @Id
     private String id;
-
+    private String questionId;
     private String chapter;
     private String topic;
     private String difficulty;
@@ -32,6 +32,7 @@ public class Question {
 
     public Question(
             String id,
+            String questionId,
             String chapter,
             String topic,
             String difficulty,
@@ -44,6 +45,7 @@ public class Question {
             Boolean latexRequired
     ) {
         this.id = id;
+        this.questionId=questionId;
         this.chapter = chapter;
         this.topic = topic;
         this.difficulty = difficulty;
@@ -63,6 +65,7 @@ public class Question {
     public static class Builder {
 
         private String id;
+        private String questionId;
         private String chapter;
         private String topic;
         private String difficulty;
@@ -76,6 +79,11 @@ public class Question {
 
         public Builder id(String id) {
             this.id = id;
+            return this;
+        }
+
+        public Builder questionId(String questionId) {
+            this.questionId = questionId;
             return this;
         }
 
@@ -132,6 +140,7 @@ public class Question {
         public Question build() {
             return new Question(
                     id,
+                    questionId,
                     chapter,
                     topic,
                     difficulty,
@@ -152,6 +161,14 @@ public class Question {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(String questionId) {
+        this.questionId = questionId;
     }
 
     public String getChapter() {
