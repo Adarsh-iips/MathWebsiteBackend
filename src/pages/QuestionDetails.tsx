@@ -15,6 +15,8 @@ import {
   type QuestionDetails
 } from "../types/QuestionDetails";
 
+import MathRenderer from "../components/MathRenderer";
+
 export default function QuestionDetailsPage() {
 
   const { id } =
@@ -67,13 +69,11 @@ export default function QuestionDetailsPage() {
         "
       >
 
-        <p
-          className="
-          text-lg
-          "
-        >
-          {data.question.questionText}
-        </p>
+        <MathRenderer
+          text={
+          data.question.questionText
+          }
+        />
 
         <div
           className="
@@ -121,9 +121,11 @@ export default function QuestionDetailsPage() {
         "
       >
 
-        <p>
-          {data.solution.solutionText}
-        </p>
+        <MathRenderer
+          text={
+          data.solution.solutionText
+          }
+        />
 
       </div>
 
@@ -140,9 +142,11 @@ export default function QuestionDetailsPage() {
           Hint:
         </strong>
 
-        <p>
-          {data.solution.hint1}
-        </p>
+        <MathRenderer
+          text={
+          data.solution.hint1
+          }
+        />
 
       </div>
 
@@ -159,9 +163,11 @@ export default function QuestionDetailsPage() {
           Common Mistake:
         </strong>
 
-        <p>
-          {data.solution.commonMistake}
-        </p>
+        <MathRenderer
+          text={
+          data.solution.commonMistake
+          }
+        />
 
       </div>
 

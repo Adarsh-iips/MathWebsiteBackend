@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { type Question } from "../types/Question";
+import MathRenderer from "./MathRenderer";
 
 interface Props {
   question: Question;
@@ -36,9 +37,11 @@ export default function QuestionCard({
           {question.chapter}
         </h2>
 
-        <p className="mt-2">
-          {question.questionText}
-        </p>
+        <MathRenderer
+          text={
+          question.questionText
+          }
+        />
 
         <div
           className="
