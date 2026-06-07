@@ -4,6 +4,9 @@ import com.example.backend.dto.AdminLoginRequest;
 import com.example.backend.dto.AuthResponse;
 import com.example.backend.service.AdminAuthService;
 import com.example.backend.service.CsvService;
+import com.example.backend.repository.AdminRepository;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +20,9 @@ public class AdminController {
     private final AdminAuthService adminAuthService;
     public AdminController(
             CsvService csvService,
-            AdminAuthService adminAuthService
+            AdminAuthService adminAuthService,
+            AdminRepository adminRepository,
+            PasswordEncoder passwordEncoder
     ) {
         this.csvService = csvService;
         this.adminAuthService = adminAuthService;
@@ -54,4 +59,5 @@ public class AdminController {
                 request
         );
     }
+
 }

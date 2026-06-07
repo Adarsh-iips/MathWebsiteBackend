@@ -10,6 +10,8 @@ public class QuestionResponse {
 
     private String topic;
 
+    private String questionId;
+
     private String difficulty;
 
     private String questionText;
@@ -23,6 +25,7 @@ public class QuestionResponse {
 
     public QuestionResponse(
             String id,
+            String questionId,
             String chapter,
             String topic,
             String difficulty,
@@ -31,6 +34,7 @@ public class QuestionResponse {
             List<String> tags
     ) {
         this.id = id;
+        this.questionId = questionId;
         this.chapter = chapter;
         this.topic = topic;
         this.difficulty = difficulty;
@@ -46,6 +50,7 @@ public class QuestionResponse {
     public static class Builder {
 
         private String id;
+        private String questionId;
         private String chapter;
         private String topic;
         private String difficulty;
@@ -55,6 +60,13 @@ public class QuestionResponse {
 
         public Builder id(String id) {
             this.id = id;
+            return this;
+        }
+
+        public Builder questionId(
+                String questionId
+        ) {
+            this.questionId = questionId;
             return this;
         }
 
@@ -91,6 +103,7 @@ public class QuestionResponse {
         public QuestionResponse build() {
             return new QuestionResponse(
                     id,
+                    questionId,
                     chapter,
                     topic,
                     difficulty,
@@ -155,5 +168,15 @@ public class QuestionResponse {
 
     public void setTags(List<String> tags) {
         this.tags = tags;
+    }
+
+    public String getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(
+            String questionId
+    ) {
+        this.questionId = questionId;
     }
 }

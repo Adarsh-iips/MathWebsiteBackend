@@ -11,6 +11,7 @@ public class QuestionMapper {
     ) {
 
         return Question.builder()
+                .questionId(dto.getQuestionId())
                 .chapter(dto.getChapter())
                 .topic(dto.getTopic())
                 .difficulty(dto.getDifficulty())
@@ -30,6 +31,7 @@ public class QuestionMapper {
 
         return QuestionResponse.builder()
                 .id(question.getId())
+                .questionId(question.getQuestionId())
                 .chapter(question.getChapter())
                 .topic(question.getTopic())
                 .difficulty(question.getDifficulty())

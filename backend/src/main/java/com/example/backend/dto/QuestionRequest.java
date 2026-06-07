@@ -13,6 +13,9 @@ public class QuestionRequest {
     private String topic;
 
     @NotBlank
+    private String questionId;
+
+    @NotBlank
     private String difficulty;
 
     private String questionType;
@@ -108,5 +111,13 @@ public class QuestionRequest {
 
     public void setLatexRequired(Boolean latexRequired) {
         this.latexRequired = latexRequired;
+    }
+
+    public String getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(String questionId) {
+        this.questionId = questionId;
     }
 }

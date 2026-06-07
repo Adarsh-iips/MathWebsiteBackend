@@ -58,6 +58,7 @@ public class SecurityConfig {
 
         http
 
+                .cors(cors -> {})
                 .csrf(csrf -> csrf.disable())
 
                 .sessionManagement(session ->
@@ -70,6 +71,7 @@ public class SecurityConfig {
 
                         .requestMatchers(
                                 "/api/admin/login",
+                                "/api/admin/create-admin",
                                 "/api/student/login",
                                 "/api/student/register"
                         ).permitAll()
