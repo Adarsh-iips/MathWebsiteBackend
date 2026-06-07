@@ -39,6 +39,10 @@ export default function Navbar() {
           Questions
         </Link>
 
+        <Link to="/admin/login">
+          Admin
+        </Link>
+
         {!token && (
 
           <>

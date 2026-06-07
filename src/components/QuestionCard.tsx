@@ -13,7 +13,7 @@ export default function QuestionCard({
   return (
 
     <Link
-      to={`/questions/${question.id}`}
+      to={`/questions/${question.questionId}`}
     >
 
       <div

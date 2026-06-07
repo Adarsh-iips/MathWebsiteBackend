@@ -1,5 +1,6 @@
 export interface Question {
   id: string
+  questionId: string
   chapter: string
   topic: string
   difficulty: string

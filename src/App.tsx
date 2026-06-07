@@ -9,7 +9,7 @@ import Questions from "./pages/Questions";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AdminUpload from "./pages/AdminUpload";
-
+import AdminLogin from "./pages/AdminLogin";
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import QuestionDetailsPage
@@ -58,7 +58,12 @@ export default function App() {
           path="/questions/:id"
           element={<QuestionDetailsPage />}
         />
-
+        
+        <Route
+          path="/admin/login"
+          element={
+          <AdminLogin />}
+        />
       </Routes>
 
     </BrowserRouter>
