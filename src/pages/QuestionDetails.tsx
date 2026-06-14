@@ -15,7 +15,8 @@ import {
   type QuestionDetails
 } from "../types/QuestionDetails";
 
-import MathRenderer from "../components/MathRenderer";
+import MathRenderer
+from "../components/MathRenderer";
 
 export default function QuestionDetailsPage() {
 
@@ -37,140 +38,233 @@ export default function QuestionDetailsPage() {
 
   }, [id]);
 
-  if (!data)
-    return <p>Loading...</p>;
+  if (!data) {
 
-  return (
-
-    <div
-      className="
-      max-w-4xl
-      mx-auto
-      p-6
-      "
-    >
-
-      <h1
-        className="
-        text-3xl
-        font-bold
-        "
-      >
-        Question
-      </h1>
+    return (
 
       <div
         className="
-        mt-6
-        bg-white
-        p-6
-        rounded
-        shadow
+        min-h-screen
+        flex
+        items-center
+        justify-center
+        text-zinc-400
+        "
+      >
+        Loading...
+      </div>
+
+    );
+  }
+
+  return (
+
+    <main
+      className="
+      max-w-5xl
+      mx-auto
+      px-6
+      py-10
+      "
+    >
+
+      {/* QUESTION */}
+
+      <section
+        className="
+        bg-zinc-900
+        border
+        border-zinc-800
+        rounded-3xl
+        p-8
         "
       >
 
-        <MathRenderer
-          text={
-          data.question.questionText
-          }
-        />
-
         <div
           className="
-          mt-4
           flex
-          gap-4
+          flex-wrap
+          gap-3
+          mb-6
           "
         >
 
-          <span>
-            Chapter:
-            {data.question.chapter}
-          </span>
-
-          <span>
-            Difficulty:
+          <span
+            className="
+            px-3
+            py-1
+            rounded-full
+            text-sm
+            bg-red-500/20
+            text-red-400
+            "
+          >
             {data.question.difficulty}
           </span>
 
-          <span>
-            Marks:
-            {data.question.marks}
+          <span
+            className="
+            px-3
+            py-1
+            rounded-full
+            text-sm
+            bg-zinc-800
+            text-zinc-300
+            "
+          >
+            {data.question.chapter}
+          </span>
+
+          <span
+            className="
+            px-3
+            py-1
+            rounded-full
+            text-sm
+            bg-zinc-800
+            text-zinc-300
+            "
+          >
+            {data.question.marks} Marks
           </span>
 
         </div>
 
-      </div>
+        <h1
+          className="
+          text-3xl
+          font-bold
+          mb-6
+          "
+        >
+          Question
+        </h1>
 
-      <h2
+        <div
+          className="
+          text-lg
+          leading-relaxed
+          "
+        >
+          <MathRenderer
+            text={
+              data.question.questionText
+            }
+          />
+        </div>
+
+      </section>
+
+      {/* SOLUTION */}
+
+      <section
         className="
-        text-2xl
-        font-bold
-        mt-10
-        "
-      >
-        Solution
-      </h2>
-
-      <div
-        className="
-        bg-green-50
-        p-6
-        rounded
-        mt-4
-        "
-      >
-
-        <MathRenderer
-          text={
-          data.solution.solutionText
-          }
-        />
-
-      </div>
-
-      <div
-        className="
-        bg-yellow-100
-        p-4
-        rounded
-        mt-4
-        "
-      >
-
-        <strong>
-          Hint:
-        </strong>
-
-        <MathRenderer
-          text={
-          data.solution.hint1
-          }
-        />
-
-      </div>
-
-      <div
-        className="
-        bg-red-100
-        p-4
-        rounded
-        mt-4
+        mt-8
+        bg-green-500/10
+        border
+        border-green-500/20
+        rounded-3xl
+        p-8
         "
       >
 
-        <strong>
-          Common Mistake:
-        </strong>
+        <h2
+          className="
+          text-2xl
+          font-bold
+          mb-6
+          text-green-400
+          "
+        >
+          Solution
+        </h2>
 
-        <MathRenderer
-          text={
-          data.solution.commonMistake
-          }
-        />
+        <div
+          className="
+          leading-relaxed
+          "
+        >
+          <MathRenderer
+            text={
+              data.solution.solutionText
+            }
+          />
+        </div>
 
-      </div>
+      </section>
 
-    </div>
+      {/* HINT + MISTAKE */}
+
+      <section
+        className="
+        mt-8
+        grid
+        md:grid-cols-2
+        gap-6
+        "
+      >
+
+        <div
+          className="
+          bg-yellow-500/10
+          border
+          border-yellow-500/20
+          rounded-3xl
+          p-6
+          "
+        >
+
+          <h3
+            className="
+            text-xl
+            font-semibold
+            text-yellow-400
+            mb-4
+            "
+          >
+            Hint
+          </h3>
+
+          <MathRenderer
+            text={
+              data.solution.hint1
+            }
+          />
+
+        </div>
+
+        <div
+          className="
+          bg-red-500/10
+          border
+          border-red-500/20
+          rounded-3xl
+          p-6
+          "
+        >
+
+          <h3
+            className="
+            text-xl
+            font-semibold
+            text-red-400
+            mb-4
+            "
+          >
+            Common Mistake
+          </h3>
+
+          <MathRenderer
+            text={
+              data.solution.commonMistake
+            }
+          />
+
+        </div>
+
+      </section>
+
+    </main>
+
   );
 }

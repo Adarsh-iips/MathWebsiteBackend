@@ -1,102 +1,180 @@
-import { useState }
-from "react";
+import { useState } from "react";
 
 import {
- studentRegister
-}
-from "../api/authApi";
+  studentRegister
+} from "../api/authApi";
 
 export default function Register() {
 
- const [username,
-  setUsername] =
-  useState("");
+  const [username, setUsername] =
+    useState("");
 
- const [email,
-  setEmail] =
-  useState("");
+  const [email, setEmail] =
+    useState("");
 
- const [password,
-  setPassword] =
-  useState("");
+  const [password, setPassword] =
+    useState("");
 
- const handleSubmit =
- async (
-  e: React.FormEvent
- ) => {
+  const handleSubmit =
+    async (
+      e: React.FormEvent
+    ) => {
 
-  e.preventDefault();
+      e.preventDefault();
 
-  await studentRegister(
-   username,
-   email,
-   password
+      await studentRegister(
+        username,
+        email,
+        password
+      );
+
+      alert(
+        "Registered Successfully"
+      );
+
+      window.location.href =
+        "/login";
+    };
+
+  return (
+
+    <div
+      className="
+      min-h-screen
+      flex
+      items-center
+      justify-center
+      px-6
+      "
+    >
+
+      <div
+        className="
+        w-full
+        max-w-md
+        bg-zinc-900
+        border
+        border-zinc-800
+        rounded-3xl
+        p-8
+        shadow-2xl
+        "
+      >
+
+        <h1
+          className="
+          text-3xl
+          font-bold
+          mb-2
+          "
+        >
+          Create Account
+        </h1>
+
+        <p
+          className="
+          text-zinc-400
+          mb-8
+          "
+        >
+          Join thousands of students
+          practicing mathematics daily.
+        </p>
+
+        <form
+          onSubmit={handleSubmit}
+          className="
+          space-y-5
+          "
+        >
+
+          <input
+            placeholder="Username"
+            value={username}
+            onChange={
+              e =>
+                setUsername(
+                  e.target.value
+                )
+            }
+            className="
+            w-full
+            bg-zinc-950
+            border
+            border-zinc-800
+            rounded-xl
+            px-4
+            py-3
+            focus:outline-none
+            focus:border-red-500
+            "
+          />
+
+          <input
+            placeholder="Email"
+            value={email}
+            onChange={
+              e =>
+                setEmail(
+                  e.target.value
+                )
+            }
+            className="
+            w-full
+            bg-zinc-950
+            border
+            border-zinc-800
+            rounded-xl
+            px-4
+            py-3
+            focus:outline-none
+            focus:border-red-500
+            "
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={
+              e =>
+                setPassword(
+                  e.target.value
+                )
+            }
+            className="
+            w-full
+            bg-zinc-950
+            border
+            border-zinc-800
+            rounded-xl
+            px-4
+            py-3
+            focus:outline-none
+            focus:border-red-500
+            "
+          />
+
+          <button
+            type="submit"
+            className="
+            w-full
+            bg-red-600
+            hover:bg-red-500
+            transition
+            rounded-xl
+            py-3
+            font-semibold
+            "
+          >
+            Create Account
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
   );
-
-  alert(
-   "Registered Successfully"
-  );
- };
-
- return (
-
-  <form
-   onSubmit={
-    handleSubmit
-   }
-   className="
-   max-w-md
-   mx-auto
-   mt-10
-   space-y-4
-   "
-  >
-
-   <input
-    placeholder="Username"
-    className="border p-2 w-full"
-    onChange={
-     e =>
-      setUsername(
-       e.target.value
-      )
-    }
-   />
-
-   <input
-    placeholder="Email"
-    className="border p-2 w-full"
-    onChange={
-     e =>
-      setEmail(
-       e.target.value
-      )
-    }
-   />
-
-   <input
-    type="password"
-    placeholder="Password"
-    className="border p-2 w-full"
-    onChange={
-     e =>
-      setPassword(
-       e.target.value
-      )
-    }
-   />
-
-   <button
-    className="
-    bg-red-600
-    text-white
-    px-4
-    py-2
-    "
-   >
-    Register
-   </button>
-
-  </form>
- );
 }

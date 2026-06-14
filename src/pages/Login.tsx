@@ -1,95 +1,127 @@
-import { useState }
-from "react";
+import { useState } from "react";
 
 import {
- studentLogin
+  studentLogin
 }
 from "../api/authApi";
 
 import {
- saveToken
+  saveToken
 }
 from "../utils/auth";
 
 export default function Login() {
 
- const [username,
-  setUsername] =
-  useState("");
+  const [username,
+    setUsername] =
+    useState("");
 
- const [password,
-  setPassword] =
-  useState("");
+  const [password,
+    setPassword] =
+    useState("");
 
- const handleSubmit =
- async (
-  e: React.FormEvent
- ) => {
+  const submit =
+    async (
+      e: React.FormEvent
+    ) => {
 
-  e.preventDefault();
+      e.preventDefault();
 
-  const response =
-   await studentLogin(
-    username,
-    password
-   );
+      const response =
+        await studentLogin(
+          username,
+          password
+        );
 
-  saveToken(
-   response.token
+      saveToken(
+        response.token
+      );
+
+      window.location.href =
+        "/";
+    };
+
+  return (
+
+    <div
+      className="
+      min-h-screen
+      flex
+      items-center
+      justify-center
+      "
+    >
+
+      <form
+        onSubmit={submit}
+        className="
+        w-full
+        max-w-md
+        bg-zinc-900
+        border
+        border-zinc-800
+        p-8
+        rounded-3xl
+        "
+      >
+
+        <h1
+          className="
+          text-3xl
+          font-bold
+          mb-8
+          "
+        >
+          Welcome Back
+        </h1>
+
+        <input
+          placeholder="Username"
+          className="
+          w-full
+          p-3
+          rounded-xl
+          bg-zinc-800
+          mb-4
+          "
+          onChange={e =>
+            setUsername(
+              e.target.value
+            )
+          }
+        />
+
+        <input
+          type="password"
+          placeholder="Password"
+          className="
+          w-full
+          p-3
+          rounded-xl
+          bg-zinc-800
+          mb-6
+          "
+          onChange={e =>
+            setPassword(
+              e.target.value
+            )
+          }
+        />
+
+        <button
+          className="
+          w-full
+          bg-red-500
+          py-3
+          rounded-xl
+          "
+        >
+          Login
+        </button>
+
+      </form>
+
+    </div>
+
   );
-
-  window.location.href =
-   "/";
- };
-
- return (
-
-  <form
-   onSubmit={
-    handleSubmit
-   }
-   className="
-   max-w-md
-   mx-auto
-   mt-10
-   space-y-4
-   "
-  >
-
-   <input
-    placeholder="Username"
-    className="border p-2 w-full"
-    onChange={
-     e =>
-      setUsername(
-       e.target.value
-      )
-    }
-   />
-
-   <input
-    type="password"
-    placeholder="Password"
-    className="border p-2 w-full"
-    onChange={
-     e =>
-      setPassword(
-       e.target.value
-      )
-    }
-   />
-
-   <button
-    className="
-    bg-red-600
-    text-white
-    px-4
-    py-2
-    "
-   >
-    Login
-   </button>
-
-  </form>
- );
 }

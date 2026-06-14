@@ -1,81 +1,127 @@
-import { Link } from
-"react-router-dom";
+import { Link } from "react-router-dom";
 
 import {
   getToken,
   logout
-}
-from "../utils/auth";
+} from "../utils/auth";
 
 export default function Navbar() {
 
-  const token =
-    getToken();
+  const token = getToken();
 
   return (
 
-    <nav
+    <header
       className="
-      bg-red-600
-      text-white
-      p-4
-      flex
-      justify-between
+      sticky
+      top-0
+      z-50
+      backdrop-blur-xl
+      border-b
+      border-zinc-800
+      bg-black/70
       "
     >
 
-      <Link to="/">
-        Math Platform
-      </Link>
-
       <div
         className="
+        max-w-7xl
+        mx-auto
+        px-6
+        py-4
         flex
-        gap-4
+        justify-between
+        items-center
         "
       >
 
-        <Link to="/questions">
-          Questions
+        <Link
+          to="/"
+          className="
+          text-xl
+          font-bold
+          tracking-tight
+          "
+        >
+          MathVerse
         </Link>
 
-        <Link to="/admin/login">
-          Admin
-        </Link>
+        <nav
+          className="
+          flex
+          items-center
+          gap-6
+          text-zinc-300
+          "
+        >
 
-        {!token && (
-
-          <>
-            <Link to="/login">
-              Login
-            </Link>
-
-            <Link to="/register">
-              Register
-            </Link>
-          </>
-
-        )}
-
-        {token && (
-
-          <button
-            onClick={() => {
-
-              logout();
-
-              window.location.reload();
-
-            }}
+          <Link
+            to="/questions"
+            className="hover:text-white"
           >
-            Logout
-          </button>
+            Questions
+          </Link>
 
-        )}
+          <Link
+            to="/admin/login"
+            className="hover:text-white"
+          >
+            Admin
+          </Link>
+
+          {!token && (
+            <>
+              <Link
+                to="/login"
+                className="hover:text-white"
+              >
+                Login
+              </Link>
+
+              <Link
+                to="/register"
+                className="
+                bg-red-500
+                px-4
+                py-2
+                rounded-xl
+                hover:bg-red-600
+                transition
+                "
+              >
+                Register
+              </Link>
+            </>
+          )}
+
+          {token && (
+
+            <button
+              onClick={() => {
+
+                logout();
+
+                window.location.reload();
+
+              }}
+              className="
+              bg-red-500
+              px-4
+              py-2
+              rounded-xl
+              hover:bg-red-600
+              transition
+              "
+            >
+              Logout
+            </button>
+
+          )}
+
+        </nav>
 
       </div>
 
-    </nav>
-
+    </header>
   );
 }

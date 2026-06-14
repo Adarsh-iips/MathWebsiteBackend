@@ -1,10 +1,8 @@
-import axios
-from "axios";
+import axios from "axios";
 
 import {
   getToken
-}
-from "../utils/auth";
+} from "../utils/auth";
 
 export default function AdminUpload() {
 
@@ -42,9 +40,8 @@ export default function AdminUpload() {
       );
 
       alert(
-        "Questions Uploaded"
+        "Questions Uploaded Successfully"
       );
-
     };
 
   const uploadSolutions =
@@ -74,25 +71,24 @@ export default function AdminUpload() {
 
             Authorization:
               `Bearer ${getToken()}`
-
           }
         }
 
       );
 
       alert(
-        "Solutions Uploaded"
+        "Solutions Uploaded Successfully"
       );
-
     };
 
   return (
 
     <div
       className="
-      max-w-4xl
+      max-w-5xl
       mx-auto
-      p-10
+      px-6
+      py-12
       "
     >
 
@@ -100,69 +96,128 @@ export default function AdminUpload() {
         className="
         text-4xl
         font-bold
-        mb-10
+        mb-3
         "
       >
         Admin Dashboard
       </h1>
 
-      <div
+      <p
         className="
-        bg-white
-        shadow
-        p-6
-        rounded
-        mb-8
+        text-zinc-400
+        mb-10
         "
       >
-
-        <h2
-          className="
-          text-2xl
-          mb-4
-          "
-        >
-          Upload Questions CSV
-        </h2>
-
-        <input
-          type="file"
-          onChange={
-            uploadQuestions
-          }
-        />
-
-      </div>
+        Manage questions and solutions
+        for the platform.
+      </p>
 
       <div
         className="
-        bg-white
-        shadow
-        p-6
-        rounded
+        grid
+        md:grid-cols-2
+        gap-8
         "
       >
 
-        <h2
+        {/* QUESTIONS */}
+
+        <div
           className="
-          text-2xl
-          mb-4
+          bg-zinc-900
+          border
+          border-zinc-800
+          rounded-3xl
+          p-8
           "
         >
-          Upload Solutions CSV
-        </h2>
 
-        <input
-          type="file"
-          onChange={
-            uploadSolutions
-          }
-        />
+          <h2
+            className="
+            text-2xl
+            font-semibold
+            mb-3
+            "
+          >
+            Upload Questions
+          </h2>
+
+          <p
+            className="
+            text-zinc-400
+            mb-6
+            "
+          >
+            Import questions from CSV.
+          </p>
+
+          <input
+            type="file"
+            accept=".csv"
+            onChange={
+              uploadQuestions
+            }
+            className="
+            block
+            w-full
+            text-sm
+            text-zinc-300
+            "
+          />
+
+        </div>
+
+        {/* SOLUTIONS */}
+
+        <div
+          className="
+          bg-zinc-900
+          border
+          border-zinc-800
+          rounded-3xl
+          p-8
+          "
+        >
+
+          <h2
+            className="
+            text-2xl
+            font-semibold
+            mb-3
+            "
+          >
+            Upload Solutions
+          </h2>
+
+          <p
+            className="
+            text-zinc-400
+            mb-6
+            "
+          >
+            Import solutions linked to
+            question IDs.
+          </p>
+
+          <input
+            type="file"
+            accept=".csv"
+            onChange={
+              uploadSolutions
+            }
+            className="
+            block
+            w-full
+            text-sm
+            text-zinc-300
+            "
+          />
+
+        </div>
 
       </div>
 
     </div>
 
   );
-
 }

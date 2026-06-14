@@ -1,62 +1,98 @@
-import { Link } from "react-router-dom";
 import { type Question } from "../types/Question";
-import MathRenderer from "./MathRenderer";
+import { Link } from "react-router-dom";
 
 interface Props {
   question: Question;
 }
 
-export default function QuestionCard({
-  question,
-}: Props) {
+export default function QuestionCard(
+  { question }: Props
+) {
 
   return (
 
     <Link
       to={`/questions/${question.questionId}`}
+      className="
+      block
+      "
     >
 
       <div
         className="
-        bg-white
-        shadow-md
-        rounded-lg
-        p-5
+        bg-zinc-900
         border
-        hover:shadow-lg
-        cursor-pointer
+        border-zinc-800
+        rounded-2xl
+        p-6
+        transition-all
+        duration-300
+        hover:border-red-500
+        hover:-translate-y-1
+        hover:shadow-[0_10px_40px_rgba(239,68,68,0.15)]
         "
       >
 
-        <h2
+        <div
           className="
-          text-xl
-          font-bold
+          flex
+          justify-between
+          items-start
           "
         >
-          {question.chapter}
-        </h2>
 
-        <MathRenderer
-          text={
-          question.questionText
-          }
-        />
+          <h2
+            className="
+            text-xl
+            font-semibold
+            "
+          >
+            {question.chapter}
+          </h2>
+
+          <span
+            className="
+            text-xs
+            px-3
+            py-1
+            rounded-full
+            bg-red-500/20
+            text-red-400
+            "
+          >
+            {question.difficulty}
+          </span>
+
+        </div>
+
+        <p
+          className="
+          mt-4
+          text-zinc-400
+          line-clamp-3
+          "
+        >
+          {question.questionText}
+        </p>
 
         <div
           className="
-          mt-3
+          mt-6
           flex
-          gap-3
+          justify-between
+          text-sm
+          text-zinc-500
           "
         >
-          <span>
-            {question.difficulty}
-          </span>
 
           <span>
             {question.marks} Marks
           </span>
+
+          <span>
+            {question.topic}
+          </span>
+
         </div>
 
       </div>

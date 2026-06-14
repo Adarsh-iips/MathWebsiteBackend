@@ -1,183 +1,84 @@
-import {
-  useEffect,
-  useState
-} from "react";
+import { useEffect, useState } from "react";
 
-import {
-  getQuestionsPage,
-  searchQuestions,
-  getQuestionsByDifficulty,
-  getQuestionsByChapter
-} from "../api/questionApi";
+import axios from "axios";
 
 import QuestionCard
 from "../components/QuestionCard";
 
-import SearchBar
-from "../components/SearchBar";
-
-import DifficultyFilter
-from "../components/DifficultyFilter";
-
-import ChapterFilter
-from "../components/ChapterFilter";
-
-import Pagination
-from "../components/Pagination";
-
-import {
-  type Question
-} from "../types/Question";
+import { type Question }
+from "../types/Question";
 
 export default function Questions() {
 
   const [questions,
-    setQuestions]
-      = useState<Question[]>([]);
+    setQuestions] =
+    useState<Question[]>([]);
 
-  const [keyword,
-    setKeyword]
-      = useState("");
-
-  const [currentPage,
-    setCurrentPage]
-      = useState(0);
+  const [page,
+    setPage] =
+    useState(0);
 
   const [totalPages,
-    setTotalPages]
-      = useState(0);
+    setTotalPages] =
+    useState(0);
 
   useEffect(() => {
 
-    loadQuestionsPage(0);
+    axios
 
-  }, []);
+      .get(
+        `http://localhost:8080/api/questions/page?page=${page}&size=12`
+      )
 
-  const loadQuestionsPage =
-    async (
-      page: number
-    ) => {
+      .then(res => {
 
-      const data =
-        await getQuestionsPage(
-          page,
-          10
+        setQuestions(
+          res.data.content
         );
 
-      setQuestions(
-        data.content
-      );
-
-      setCurrentPage(
-        data.number
-      );
-
-      setTotalPages(
-        data.totalPages
-      );
-
-    };
-
-  const handleSearch =
-    async () => {
-
-      if (!keyword.trim()) {
-
-        loadQuestionsPage(0);
-
-        return;
-      }
-
-      const data =
-        await searchQuestions(
-          keyword
+        setTotalPages(
+          res.data.totalPages
         );
 
-      setQuestions(data);
+      });
 
-      setTotalPages(0);
-
-    };
-
-  const handleDifficulty =
-    async (
-      difficulty: string
-    ) => {
-
-      if (!difficulty) {
-
-        loadQuestionsPage(0);
-
-        return;
-      }
-
-      const data =
-        await getQuestionsByDifficulty(
-          difficulty
-        );
-
-      setQuestions(data);
-
-      setTotalPages(0);
-
-    };
-
-  const handleChapter =
-    async (
-      chapter: string
-    ) => {
-
-      if (!chapter) {
-
-        loadQuestionsPage(0);
-
-        return;
-      }
-
-      const data =
-        await getQuestionsByChapter(
-          chapter
-        );
-
-      setQuestions(data);
-
-      setTotalPages(0);
-
-    };
+  }, [page]);
 
   return (
 
-    <div
+    <main
       className="
-      p-6
+      max-w-7xl
+      mx-auto
+      px-6
+      py-12
       "
     >
 
-      <SearchBar
-        keyword={keyword}
-        setKeyword={setKeyword}
-        onSearch={handleSearch}
-      />
-
       <div
         className="
-        flex
-        gap-4
-        mb-6
+        mb-10
         "
       >
 
-        <DifficultyFilter
-          onChange={
-            handleDifficulty
-          }
-        />
+        <h1
+          className="
+          text-5xl
+          font-black
+          "
+        >
+          Question Bank
+        </h1>
 
-        <ChapterFilter
-          onChange={
-            handleChapter
-          }
-        />
+        <p
+          className="
+          text-zinc-400
+          mt-3
+          "
+        >
+          Explore chapter-wise
+          questions with solutions.
+        </p>
 
       </div>
 
@@ -186,7 +87,7 @@ export default function Questions() {
         grid
         md:grid-cols-2
         lg:grid-cols-3
-        gap-4
+        gap-6
         "
       >
 
@@ -203,28 +104,71 @@ export default function Questions() {
 
       </div>
 
+      <div
+        className="
+        flex
+        justify-center
+        gap-4
+        mt-12
+        "
+      >
 
-      {totalPages > 0 && (
+        <button
 
-        <Pagination
+          disabled={page === 0}
 
-          currentPage={
-            currentPage
+          onClick={() =>
+            setPage(
+              page - 1
+            )
           }
 
-          totalPages={
-            totalPages
+          className="
+          px-5
+          py-2
+          rounded-xl
+          bg-zinc-800
+          disabled:opacity-40
+          "
+        >
+          Previous
+        </button>
+
+        <div
+          className="
+          flex
+          items-center
+          text-zinc-400
+          "
+        >
+          Page {page + 1}
+        </div>
+
+        <button
+
+          disabled={
+            page + 1 >= totalPages
           }
 
-          onPageChange={
-            loadQuestionsPage
+          onClick={() =>
+            setPage(
+              page + 1
+            )
           }
 
-        />
+          className="
+          px-5
+          py-2
+          rounded-xl
+          bg-red-500
+          "
+        >
+          Next
+        </button>
 
-      )}
+      </div>
 
-    </div>
+    </main>
 
   );
 }
